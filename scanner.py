@@ -81,7 +81,7 @@ async def process_product(product, semaphore, db, amz_cookie, sc):
                 logger.warning(f"{asin} missing GL, skipping")
                 return
 
-            price, shipping = await sc.get_price(asin)
+            price = await sc.get_price(asin)
 
             if price is None or price <= 0:
                 logger.warning(f"{asin} invalid price: {price}")
@@ -89,7 +89,7 @@ async def process_product(product, semaphore, db, amz_cookie, sc):
 
             logger.info(f"{asin} price={price}")
 
-            fees = await sc.get_fees(asin, gl, price, shipping)
+            fees = await sc.get_fees(asin, gl, price)
 
             if fees is None:
                 logger.warning(f"{asin} fees returned None")
