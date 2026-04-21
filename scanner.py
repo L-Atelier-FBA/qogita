@@ -142,7 +142,7 @@ async def process_product(product, semaphore, db, amz_cookie, sc):
                 "roi": roi,
                 "estimated_sales": sales,
                 "amazon_link": f"https://www.amazon.fr/dp/{asin}",
-                "supplier_link": product.get("product_url"),
+                "supplier_link": product.get("product_link"),
                 "sas_link": f"https://sas.selleramp.com/sas/lookup?SasLookup%5Bsearch_term%5D={asin}",
                 "image_url": img
             }
