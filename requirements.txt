@@ -1,0 +1,5 @@
+curl-cffi
+python-dotenv
+aiohttp
+bs4
+lxml
