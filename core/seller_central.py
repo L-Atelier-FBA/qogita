@@ -97,28 +97,23 @@ class SellerCentral:
 
                 price_data = data.get("data", {})
                 price = price_data.get("price", {})
-                shipping = price_data.get("shipping", {})
 
                 price_amt = None
-                shipping_amt = None
 
                 if price and price.get("amount") is not None:
                     price_amt = float(price["amount"])
 
-                if shipping and shipping.get("amount") is not None:
-                    shipping_amt =  float(shipping["amount"])
-
                 await asyncio.sleep(1 + attempt * 0.5)
 
-                return price_amt, shipping_amt
+                return price_amt
 
             except Exception as e:
                 logger.warning(f"Price retry {attempt} failed {asin}: {e}")
                 await asyncio.sleep(1 + attempt * 0.5)
 
-        return None, None
+        return None
 
-    async def get_fees(self, asin: str, gl: str, price: float, shipping: float):
+    async def get_fees(self, asin: str, gl: str, price: float):
         if not gl or price is None:
             return None
 
@@ -142,7 +137,7 @@ class SellerCentral:
                 "weightUnit": "",
                 "afnPriceStr": str(price),
                 "mfnPriceStr": str(price),
-                "mfnShippingPriceStr": str(shipping),
+                "mfnShippingPriceStr": "0",
                 "currency": "EUR",
                 "isNewDefined": "false"
             },
