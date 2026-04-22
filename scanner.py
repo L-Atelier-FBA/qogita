@@ -97,9 +97,7 @@ async def process_product(product, semaphore, db, amz_cookie, sc):
 
             logger.info(f"{asin} fees={fees}")
 
-            vat_on_fees = fees * (20 / 100)
-
-            profit = price - fees - supplier_cost - vat_on_fees
+            profit = price - fees - supplier_cost
 
             if supplier_cost <= 0:
                 logger.warning(f"{asin} invalid supplier cost")
