@@ -15,7 +15,7 @@ class SellerCentral:
 
     async def get_product_data(self, asin: str):
         url = (
-            f"https://sellercentral-europe.amazon.com/rcpublic/productmatch?"
+            f"https://sellercentral.amazon.fr/rcpublic/productmatch?"
             f"searchKey={asin}&countryCode={self.country_code}&locale={self.locale}"
         )
 
@@ -70,7 +70,7 @@ class SellerCentral:
 
     async def get_price(self, asin: str):
         url = (
-            f"https://sellercentral-europe.amazon.com/rcpublic/getadditionalpronductinfo?"
+            f"https://sellercentral.amazon.fr/rcpublic/getadditionalpronductinfo?"
             f"countryCode={self.country_code}&asin={asin}&fnsku=&searchType=GENERAL&locale={self.locale}"
         )
 
@@ -118,7 +118,7 @@ class SellerCentral:
             return None
 
         url = (
-            f"https://sellercentral-europe.amazon.com/rcpublic/getfees?"
+            f"https://sellercentral.amazon.fr/rcpublic/getfees?"
             f"countryCode={self.country_code}&locale={self.locale}"
         )
 
@@ -172,6 +172,8 @@ class SellerCentral:
                     await asyncio.sleep(1 + attempt * 0.5)
                     continue
 
+                other_cost = float(core.get("otherCost", {}).get("vatAmount", {}).get("amount", 0.0))
+
                 storage_fee = (
                     float(core.get("perUnitPeakStorageFee", {}).get("total", {}).get("amount", 0.0))
                     if peak
@@ -184,7 +186,7 @@ class SellerCentral:
                 variable = float(core.get("otherFeeInfoMap", {}).get("VariableClosingFee", {}).get("total", {}).get("amount", 0.0))
                 digital = float(core.get("otherFeeInfoMap", {}).get("DigitalServicesFee", {}).get("total", {}).get("amount", 0.0))
 
-                return round(fulfillment + referral + digital + storage_fee + fixed + variable, 2)
+                return round(fulfillment + referral + digital + storage_fee + fixed + variable + other_cost, 2)
 
             except Exception as e:
                 logger.warning(f"Fees retry {attempt} failed {asin}: {e}")
