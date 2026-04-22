@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "ean": "8809835060058",
+    "asin": "B09Y112RTC",
+    "name": "Tocobo Bio Watery Sun Cream Spf50 Pa++++ - 50ml",
+    "supplier_cost": 7.128,
+    "amazon_price": 19.9,
+    "fees": 8.69,
+    "profit": 2.343999999999999,
+    "roi": 32.8843995510662,
+    "estimated_sales": 11,
+    "amazon_link": "https://www.amazon.fr/dp/B09Y112RTC",
+    "supplier_link": "https://www.qogita.com/products/2ZNK33/tocobo-bio-watery-sun-cream-spf50-pa-50ml/",
+    "sas_link": "https://sas.selleramp.com/sas/lookup?SasLookup%5Bsearch_term%5D=B09Y112RTC",
+    "image_url": "https://m.media-amazon.com/images/I/31CdLb-PT5L._SL120_.jpg",
+    "posted": false,
+    "posted_at": null,
+    "created_at": "2026-04-22T16:42:39.966527+00:00"
+  },
+  {
+    "ean": "3337875905510",
+    "asin": "B0G51VWZYS",
+    "name": "La Roche-Posay Lipikar Gel Lavant 400ml",
+    "supplier_cost": 7.116,
+    "amazon_price": 28.0,
+    "fees": 11.9,
+    "profit": 6.604000000000001,
+    "roi": 92.80494659921305,
+    "estimated_sales": 13,
+    "amazon_link": "https://www.amazon.fr/dp/B0G51VWZYS",
+    "supplier_link": "https://www.qogita.com/products/d9189c257bf0423fa8b74d5b2fd267b4/la-roche-posay-lipikar-gel-lavant-400ml/",
+    "sas_link": "https://sas.selleramp.com/sas/lookup?SasLookup%5Bsearch_term%5D=B0G51VWZYS",
+    "image_url": "https://m.media-amazon.com/images/I/4156+i4x+sL._SL120_.jpg",
+    "posted": false,
+    "posted_at": null,
+    "created_at": "2026-04-22T16:43:16.887938+00:00"
+  }
+]
