@@ -171,9 +171,7 @@ class SellerCentral:
                 if not core:
                     await asyncio.sleep(1 + attempt * 0.5)
                     continue
-
-                other_cost = float(core.get("otherCost", {}).get("vatAmount", {}).get("amount", 0.0))
-
+                    
                 storage_fee = (
                     float(core.get("perUnitPeakStorageFee", {}).get("total", {}).get("amount", 0.0))
                     if peak
@@ -186,7 +184,7 @@ class SellerCentral:
                 variable = float(core.get("otherFeeInfoMap", {}).get("VariableClosingFee", {}).get("total", {}).get("amount", 0.0))
                 digital = float(core.get("otherFeeInfoMap", {}).get("DigitalServicesFee", {}).get("total", {}).get("amount", 0.0))
 
-                return round(fulfillment + referral + digital + storage_fee + fixed + variable + other_cost, 2)
+                return round(fulfillment + referral + digital + storage_fee + fixed + variable, 2)
 
             except Exception as e:
                 logger.warning(f"Fees retry {attempt} failed {asin}: {e}")
