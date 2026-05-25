@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: fba-scanner
+  group: deals-json
   cancel-in-progress: false
 
 jobs:
@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -44,6 +46,22 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+
           git add data/deals.json
-          git diff --cached --quiet || git commit -m "Update deals"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Update deals"
+
+          # Sync with latest remote changes
+          git pull --rebase origin main
+
+          # Retry push if GitHub has temporary issues
+          for i in 1 2 3 4 5; do
+            git push origin main && break
+            echo "Push failed. Retrying in 15 seconds..."
+            sleep 15
+          done
